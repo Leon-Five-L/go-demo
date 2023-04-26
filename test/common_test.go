@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"time"
 )
 
 func TestCommon(t *testing.T) {
@@ -20,4 +21,12 @@ func TestCommon(t *testing.T) {
 		return
 	}
 	defer httpGet.Body.Close()
+}
+
+// test get month from a time
+func TestGetMonth(t *testing.T) {
+	// convert date string `2023-01-01 00:00:00` to time and get month from time
+	beginTime, _ := time.Parse(time.DateTime, "2023-01-01 00:00:00")
+	month := beginTime.Month()
+	fmt.Println(int(month))
 }
