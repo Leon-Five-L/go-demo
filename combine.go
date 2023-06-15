@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 /**
 Go 中没有继承的概念，但是可以通过匿名字段来实现继承的效果。
@@ -65,4 +67,39 @@ func compare() {
 	var a int = 5
 	var b myInt = 6
 	fmt.Println(a + int(b)) // 输出：11
+}
+
+// ———————————————————— 组合实现继承 ————————————————————
+
+type HumanInterface interface {
+	Say()
+	Run()
+}
+
+type BaseHuman struct{}
+
+func (h *BaseHuman) Say() {
+	fmt.Println("BaseHuman Say")
+}
+
+type EarthHuman struct {
+	BaseHuman
+}
+
+func (h *EarthHuman) Run() {
+	fmt.Println("EarthHuman Run")
+}
+
+// func (h *EarthHuman) Say() {
+// 	fmt.Println("EarthHuman Say")
+// }
+
+func execHuman(h HumanInterface) {
+	h.Say()
+	h.Run()
+}
+
+func doMainCombine() {
+	h := &EarthHuman{}
+	execHuman(h)
 }
